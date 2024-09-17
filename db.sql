@@ -50,3 +50,7 @@ CREATE TABLE status_etudiant (
     id SERIAL PRIMARY KEY,
     status VARCHAR(50) NOT NULL
 );
+
+\d etudiant;
+ALTER TABLE etudiant ADD COLUMN status VARCHAR(50) NOT NULL DEFAULT 'ACTIF';
+
