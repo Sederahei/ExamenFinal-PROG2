@@ -34,10 +34,12 @@ import org.alherendro.absenceetudiant.model.StatusEtudiant;
     }
 
     public String getAdresse() {
+
         return null;
     }
 
     public String getStd() {
+
         return null;
     }
 
