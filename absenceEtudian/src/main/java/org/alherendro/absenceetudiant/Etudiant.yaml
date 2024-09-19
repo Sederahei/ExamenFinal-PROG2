@@ -1,0 +1,105 @@
+
+openapi: 3.0.0
+info:
+  title: API de Gestion des Étudiants
+  version: 1.0.0
+paths:
+  /etudiants:
+    get:
+      summary: Obtenir tous les étudiants
+      responses:
+        '200':
+          description: Liste des étudiants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Etudiant'
+        '500':
+          description: Erreur serveur
+    post:
+      summary: Ajouter un étudiant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Etudiant'
+      responses:
+        '201':
+          description: Étudiant ajouté avec succès
+        '500':
+          description: Erreur lors de l'ajout de l'étudiant
+
+  /etudiants/{id}:
+    get:
+      summary: Obtenir un étudiant par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Étudiant trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Etudiant'
+        '404':
+          description: Étudiant non trouvé
+        '500':
+          description: Erreur serveur
+    put:
+      summary: Modifier un étudiant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Etudiant'
+      responses:
+        '200':
+          description: Étudiant modifié avec succès
+        '500':
+          description: Erreur lors de la modification de l'étudiant
+    delete:
+      summary: Supprimer un étudiant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Étudiant supprimé avec succès
+        '500':
+          description: Erreur lors de la suppression de l'étudiant
+
+components:
+  schemas:
+    Etudiant:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nom:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          example: "johndoe@example.com"
+
+      required:
+        - nom
+        - email

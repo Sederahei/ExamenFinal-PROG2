@@ -21,9 +21,9 @@ public class NiveauController {
     public ResponseEntity<Void> ajouterNiveau(@RequestBody Niveau niveau) {
         try {
             niveauService.ajouterNiveau(niveau);
-            return ResponseEntity.status(201).build(); // Created
+            return ResponseEntity.status(201).build();
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 
@@ -33,7 +33,7 @@ public class NiveauController {
             Niveau niveau = niveauService.obtenirNiveauParId(id);
             return niveau != null ? ResponseEntity.ok(niveau) : ResponseEntity.notFound().build();
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 
@@ -43,18 +43,18 @@ public class NiveauController {
             List<Niveau> niveaux = niveauService.obtenirTousLesNiveaux();
             return ResponseEntity.ok(niveaux);
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> modifierNiveau(@PathVariable int id, @RequestBody Niveau niveau) {
         try {
-            niveau.setId(id); // Set the ID for the niveau to be updated
+            niveau.setId(id);
             niveauService.modifierNiveau(niveau);
-            return ResponseEntity.noContent().build(); // No Content
+            return ResponseEntity.noContent().build();
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 
@@ -62,9 +62,9 @@ public class NiveauController {
     public ResponseEntity<Void> supprimerNiveau(@PathVariable int id) {
         try {
             niveauService.supprimerNiveau(id);
-            return ResponseEntity.noContent().build(); // No Content
+            return ResponseEntity.noContent().build();
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 }

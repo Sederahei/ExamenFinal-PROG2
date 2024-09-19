@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: API de Gestion des Groupes
+  version: 1.0.0
+paths:
+  /api/groupes:
+    post:
+      summary: Ajouter un groupe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '201':
+          description: Groupe ajouté avec succès
+        '500':
+          description: Erreur lors de l'ajout du groupe
+
+    get:
+      summary: Obtenir tous les groupes
+      responses:
+        '200':
+          description: Liste des groupes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+        '500':
+          description: Erreur serveur
+
+  /api/groupes/{id}:
+    get:
+      summary: Obtenir un groupe par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Groupe trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '404':
+          description: Groupe non trouvé
+        '500':
+          description: Erreur serveur
+
+    put:
+      summary: Modifier un groupe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '200':
+          description: Groupe modifié avec succès
+        '500':
+          description: Erreur lors de la modification du groupe
+
+    delete:
+      summary: Supprimer un groupe
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Groupe supprimé avec succès
+        '500':
+          description: Erreur lors de la suppression du groupe
+
+components:
+  schemas:
+    Group:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nom:
+          type: string
+          example: "Groupe A"
+        description:
+          type: string
+          example: "Description du groupe A"
+
+      required:
+        - nom
+

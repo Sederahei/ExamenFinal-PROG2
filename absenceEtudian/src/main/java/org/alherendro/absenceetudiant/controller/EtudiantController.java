@@ -19,7 +19,7 @@ public class EtudiantController {
         this.etudiantService = etudiantService;
     }
 
-    // Récupérer tous les étudiants
+
     @GetMapping
     public ResponseEntity<List<Etudiant>> getAllEtudiants() {
         try {
@@ -30,7 +30,7 @@ public class EtudiantController {
         }
     }
 
-    // Récupérer un étudiant par son ID
+
     @GetMapping("/{id}")
     public ResponseEntity<Etudiant> getEtudiantById(@PathVariable int id) {
         try {
@@ -45,7 +45,7 @@ public class EtudiantController {
         }
     }
 
-    // Ajouter un nouvel étudiant
+
     @PostMapping
     public ResponseEntity<String> ajouterEtudiant(@RequestBody Etudiant etudiant) {
         try {
@@ -56,7 +56,7 @@ public class EtudiantController {
         }
     }
 
-    // Modifier un étudiant existant
+
     @PutMapping("/{id}")
     public ResponseEntity<String> modifierEtudiant(@PathVariable int id, @RequestBody Etudiant etudiant) {
         try {
@@ -68,7 +68,7 @@ public class EtudiantController {
         }
     }
 
-    // Supprimer un étudiant
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> supprimerEtudiant(@PathVariable int id) {
         try {

@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: API de Gestion des Statuts des Étudiants
+  version: 1.0.0
+paths:
+  /statusEtudiants:
+    post:
+      summary: Ajouter un statut d'étudiant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Status_etudiant'
+      responses:
+        '201':
+          description: Statut d'étudiant ajouté avec succès
+        '500':
+          description: Erreur lors de l'ajout du statut
+
+    get:
+      summary: Obtenir tous les statuts des étudiants
+      responses:
+        '200':
+          description: Liste des statuts des étudiants
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Status_etudiant'
+        '500':
+          description: Erreur serveur
+
+  /statusEtudiants/{id}:
+    get:
+      summary: Obtenir un statut d'étudiant par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Statut d'étudiant trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status_etudiant'
+        '404':
+          description: Statut d'étudiant non trouvé
+        '500':
+          description: Erreur serveur
+
+    put:
+      summary: Modifier un statut d'étudiant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Status_etudiant'
+      responses:
+        '200':
+          description: Statut d'étudiant modifié avec succès
+        '500':
+          description: Erreur lors de la modification du statut
+
+    delete:
+      summary: Supprimer un statut d'étudiant
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Statut d'étudiant supprimé avec succès
+        '500':
+          description: Erreur lors de la suppression du statut
+
+components:
+  schemas:
+    Status_etudiant:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nom:
+          type: string
+          example: "Statut Actif"
+        description:
+          type: string
+          example: "L'étudiant est actif et suit des cours."
+
+      required:
+        - nom
+
+  

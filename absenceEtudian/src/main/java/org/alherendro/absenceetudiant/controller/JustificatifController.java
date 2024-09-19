@@ -22,9 +22,9 @@ public class JustificatifController {
     public ResponseEntity<Void> ajouterJustificatif(@RequestBody Justificatif justificatif) {
         try {
             justificatifService.ajouterJustificatif(justificatif);
-            return ResponseEntity.status(201).build(); // Created
+            return ResponseEntity.status(201).build();
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 
@@ -34,7 +34,7 @@ public class JustificatifController {
             Justificatif justificatif = justificatifService.obtenirJustificatifParId(id);
             return justificatif != null ? ResponseEntity.ok(justificatif) : ResponseEntity.notFound().build();
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 
@@ -44,18 +44,18 @@ public class JustificatifController {
             List<Justificatif> justificatifs = justificatifService.obtenirTousLesJustificatifs();
             return ResponseEntity.ok(justificatifs);
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> modifierJustificatif(@PathVariable int id, @RequestBody Justificatif justificatif) {
-        justificatif.setId(id); // Set the ID from the path variable
+        justificatif.setId(id);
         try {
             justificatifService.modifierJustificatif(justificatif);
-            return ResponseEntity.ok().build(); // OK
+            return ResponseEntity.ok().build();
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 
@@ -63,9 +63,9 @@ public class JustificatifController {
     public ResponseEntity<Void> supprimerJustificatif(@PathVariable int id) {
         try {
             justificatifService.supprimerJustificatif(id);
-            return ResponseEntity.noContent().build(); // No Content
+            return ResponseEntity.noContent().build();
         } catch (SQLException e) {
-            return ResponseEntity.status(500).build(); // Internal Server Error
+            return ResponseEntity.status(500).build();
         }
     }
 }

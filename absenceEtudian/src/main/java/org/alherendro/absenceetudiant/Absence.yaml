@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: API de Gestion des Absences
+  version: 1.0.0
+paths:
+  /absences:
+    post:
+      summary: Ajouter une absence
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Absence'
+      responses:
+        '201':
+          description: Absence ajoutée avec succès
+        '500':
+          description: Erreur serveur
+    get:
+      summary: Obtenir toutes les absences
+      responses:
+        '200':
+          description: Liste des absences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Absence'
+        '500':
+          description: Erreur serveur
+
+  /absences/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Obtenir une absence par ID
+      responses:
+        '200':
+          description: Absence trouvée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Absence'
+        '404':
+          description: Absence non trouvée
+        '500':
+          description: Erreur serveur
+    put:
+      summary: Modifier une absence
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Absence'
+      responses:
+        '200':
+          description: Absence modifiée avec succès
+        '500':
+          description: Erreur serveur
+    delete:
+      summary: Supprimer une absence
+      responses:
+        '204':
+          description: Absence supprimée avec succès
+        '404':
+          description: Absence non trouvée
+        '500':
+          description: Erreur serveur
+
+components:
+  schemas:
+    Absence:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        date_absence:
+          type: string
+          format: date
+          example: "2024-09-01"
+        cours:
+          type: string
+          example: "PROG1"
+        id_etudiant:
+          type: integer
+          example: 1
+      required:
+        - date_absence
+        - id_etudiant

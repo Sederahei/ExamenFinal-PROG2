@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: API de Gestion des Justificatifs
+  version: 1.0.0
+paths:
+  /justificatifs:
+    post:
+      summary: Ajouter un justificatif
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Justificatif'
+      responses:
+        '201':
+          description: Justificatif ajouté avec succès
+        '500':
+          description: Erreur lors de l'ajout du justificatif
+
+    get:
+      summary: Obtenir tous les justificatifs
+      responses:
+        '200':
+          description: Liste des justificatifs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Justificatif'
+        '500':
+          description: Erreur serveur
+
+  /justificatifs/{id}:
+    get:
+      summary: Obtenir un justificatif par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Justificatif trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Justificatif'
+        '404':
+          description: Justificatif non trouvé
+        '500':
+          description: Erreur serveur
+
+    put:
+      summary: Modifier un justificatif
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Justificatif'
+      responses:
+        '200':
+          description: Justificatif modifié avec succès
+        '500':
+          description: Erreur lors de la modification du justificatif
+
+    delete:
+      summary: Supprimer un justificatif
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Justificatif supprimé avec succès
+        '500':
+          description: Erreur lors de la suppression du justificatif
+
+components:
+  schemas:
+    Justificatif:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        dateJustificatif:
+          type: string
+          format: date
+          example: "2024-09-01"
+        description:
+          type: string
+          example: "Justificatif de l'absence pour maladie"
+
+      required:
+        - dateJustificatif
+        - description

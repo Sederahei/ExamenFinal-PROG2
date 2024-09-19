@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  title: API de Gestion des Niveaux
+  version: 1.0.0
+paths:
+  /niveaux:
+    post:
+      summary: Ajouter un niveau
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Niveau'
+      responses:
+        '201':
+          description: Niveau ajouté avec succès
+        '500':
+          description: Erreur lors de l'ajout du niveau
+
+    get:
+      summary: Obtenir tous les niveaux
+      responses:
+        '200':
+          description: Liste des niveaux
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Niveau'
+        '500':
+          description: Erreur serveur
+
+  /niveaux/{id}:
+    get:
+      summary: Obtenir un niveau par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Niveau trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Niveau'
+        '404':
+          description: Niveau non trouvé
+        '500':
+          description: Erreur serveur
+
+    put:
+      summary: Modifier un niveau
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Niveau'
+      responses:
+        '204':
+          description: Niveau modifié avec succès
+        '500':
+          description: Erreur lors de la modification du niveau
+
+    delete:
+      summary: Supprimer un niveau
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Niveau supprimé avec succès
+        '500':
+          description: Erreur lors de la suppression du niveau
+
+components:
+  schemas:
+    Niveau:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nom:
+          type: string
+          example: "Niveau 1"
+        description:
+          type: string
+          example: "Description du niveau"
+
+      required:
+        - nom
+
+  

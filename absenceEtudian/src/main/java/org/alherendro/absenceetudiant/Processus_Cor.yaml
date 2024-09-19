@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: API de Gestion des Processus COR
+  version: 1.0.0
+paths:
+  /processusCor:
+    post:
+      summary: Ajouter un processus COR
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Processus_Cor'
+      responses:
+        '201':
+          description: Processus COR ajouté avec succès
+        '500':
+          description: Erreur lors de l'ajout du processus COR
+
+    get:
+      summary: Obtenir tous les processus COR
+      responses:
+        '200':
+          description: Liste des processus COR
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Processus_Cor'
+        '500':
+          description: Erreur serveur
+
+  /processusCor/{id}:
+    get:
+      summary: Obtenir un processus COR par ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Processus COR trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Processus_Cor'
+        '404':
+          description: Processus COR non trouvé
+        '500':
+          description: Erreur serveur
+
+    put:
+      summary: Modifier un processus COR
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Processus_Cor'
+      responses:
+        '200':
+          description: Processus COR modifié avec succès
+        '500':
+          description: Erreur lors de la modification du processus COR
+
+    delete:
+      summary: Supprimer un processus COR
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Processus COR supprimé avec succès
+        '500':
+          description: Erreur lors de la suppression du processus COR
+
+components:
+  schemas:
+    Processus_Cor:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        nom:
+          type: string
+          example: "Processus COR 1"
+        description:
+          type: string
+          example: "Description du processus COR"
+
+      required:
+        - nom
+

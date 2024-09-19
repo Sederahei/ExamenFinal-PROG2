@@ -21,7 +21,6 @@ public class GroupController {
         this.groupService = groupService;
     }
 
-    // Endpoint to create a new group
     @PostMapping
     public ResponseEntity<String> ajouterGroup(@RequestBody Group group) {
         try {
@@ -32,7 +31,6 @@ public class GroupController {
         }
     }
 
-    // Endpoint to get a group by ID
     @GetMapping("/{id}")
     public ResponseEntity<Group> obtenirGroupParId(@PathVariable int id) {
         try {
@@ -47,7 +45,7 @@ public class GroupController {
         }
     }
 
-    // Endpoint to get all groups
+
     @GetMapping
     public ResponseEntity<List<Group>> obtenirTousLesGroupes() {
         try {
@@ -58,7 +56,7 @@ public class GroupController {
         }
     }
 
-    // Endpoint to update a group by ID
+
     @PutMapping("/{id}")
     public ResponseEntity<String> modifierGroup(@PathVariable int id, @RequestBody Group group) {
         try {
@@ -70,7 +68,6 @@ public class GroupController {
         }
     }
 
-    // Endpoint to delete a group by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<String> supprimerGroup(@PathVariable int id) {
         try {
