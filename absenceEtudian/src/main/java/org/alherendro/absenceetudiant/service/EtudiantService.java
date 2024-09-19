@@ -1,9 +1,8 @@
 package org.alherendro.absenceetudiant.service;
 
-
 import org.alherendro.absenceetudiant.DAO.EtudiantDAO;
-import org.alherendro.absenceetudiant.DAO.EtudiantDAOImpl;
 import org.alherendro.absenceetudiant.entite.Etudiant;
+import org.alherendro.absenceetudiant.repository.EtudiantRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -12,31 +11,29 @@ import java.util.List;
 @Service
 public class EtudiantService {
 
-    private EtudiantDAO etudiantDAO;
+    private final EtudiantDAO etudiantRepository;
 
-    public EtudiantService(EtudiantDAO etudiantDAO) {
-        this.etudiantDAO = etudiantDAO;
-    }
-
-    public void modifierEtudiant(Etudiant etudiant) throws SQLException {
-        etudiantDAO.update(etudiant);
-
-
+    public EtudiantService(EtudiantRepository etudiantRepository) {
+        this.etudiantRepository = etudiantRepository;
     }
 
     public List<Etudiant> obtenirTousLesEtudiants() throws SQLException {
-
-        return etudiantDAO.getAll();
+        return etudiantRepository.obtenirTousLesEtudiants();
     }
 
     public Etudiant obtenirEtudiantParId(int id) throws SQLException {
+        return etudiantRepository.obtenirEtudiantParId(id);
+    }
 
-            return etudiantDAO.getById(id);
+    public void ajouterEtudiant(Etudiant etudiant) throws SQLException {
+        etudiantRepository.ajouterEtudiant(etudiant);
+    }
 
+    public void modifierEtudiant(Etudiant etudiant) throws SQLException {
+        etudiantRepository.modifierEtudiant(etudiant);
     }
 
     public void supprimerEtudiant(int id) throws SQLException {
-            etudiantDAO.delete(id);
-        }
+        etudiantRepository.supprimerEtudiant(id);
     }
-
+}
