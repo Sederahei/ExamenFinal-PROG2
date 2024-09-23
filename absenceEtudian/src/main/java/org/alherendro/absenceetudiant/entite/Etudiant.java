@@ -43,6 +43,14 @@ import org.alherendro.absenceetudiant.model.StatusEtudiant;
         return null;
     }
 
+    public String getNom() {
 
+        return null;
+    }
+
+
+    public Thread getNiveau() {
+        return null;
+    }
 }
 
